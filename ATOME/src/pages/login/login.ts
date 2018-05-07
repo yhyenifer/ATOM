@@ -56,6 +56,8 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+    this.user.email = "y@y.co";
+    this.user.password = "123456";
   }
 
 //autenticar

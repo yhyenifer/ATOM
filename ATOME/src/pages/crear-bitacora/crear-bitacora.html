@@ -41,6 +41,10 @@
         </ion-item>
       </ion-row>
       <ion-row>
+          <ion-item>
+              <ion-label>{{lista}}</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
       <ion-item>
         <ion-label>Altura: {{altura}}</ion-label>
         <ion-input></ion-input>
@@ -55,7 +59,7 @@
   </ion-row>
 
   <ion-fab right bottom>
-      <button ion-fab color="atome" [disabled]="!isenabled" (click)="iniciarPractica()"><ion-icon name="play"></ion-icon></button>
+      <button ion-fab color="atome" [disabled]="!isenabled2" (click)="iniciarPractica()"><ion-icon name="play"></ion-icon></button>
      
     </ion-fab>
 

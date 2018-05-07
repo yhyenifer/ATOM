@@ -18,6 +18,7 @@ import { BluetoothArduinoService } from '../../services/bluetoothArduino/bluetoo
   templateUrl: 'crear-bitacora.html',
 })
 export class CrearBitacoraPage {
+  lista: string = "";
   tiempo: any;
   altura: any;
   recibido: string = "";
@@ -26,6 +27,7 @@ export class CrearBitacoraPage {
   items: Observable<any[]>;
   estadoConexion:string;
   isenabled: boolean;
+  isenabled2: boolean;
   public selectedvalue;
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -78,6 +80,7 @@ conectar(seleccion){
               handler: () => {
                 this.bluetooth.desconectar();
                 this.bluetooth.conectar(seleccion.id).then(success => {
+                  
                   this.bluetooth.presentToast(success);
                 }, fail => {
                   this.bluetooth.presentToast(fail);
@@ -106,7 +109,7 @@ conectar(seleccion){
                   this.bluetooth.presentToast(success);
                   this.estadoConexion = "conectada";
                   this.isenabled = true;
-                  this.bluetooth.mensaje = "2";
+                  this.mensaje = "2";
                   this.enviarMensajes();
 
                 }, fail => {
@@ -129,12 +132,17 @@ conectar(seleccion){
         if (entrada != "") {
           this.recibido = entrada;
           if(entrada.substr(0,2)==="a:"){
+            this.isenabled2 = true;
+            this.lista = "PRACTICA LISTA"
             this.altura = entrada.substr(2,entrada.length - 1);
             //this.altura = entrada.length;
           }else if(entrada.substr(0,2)==="t:"){
+            this.isenabled2 = true;
+            this.lista = "PRACTICA LISTA"
             this.tiempo = entrada.substr(2,entrada.length - 1);
           }else if(entrada==="PRACTICA NO LISTA"){
-            //HAZ LO TUYO;
+            this.lista = entrada;
+            this.isenabled2 = false;
           }
           
           console.log(`Entrada: ${entrada}`);
@@ -150,7 +158,7 @@ conectar(seleccion){
 
   desconectar(){
     this.bluetooth.desconectar();
-
+    this.isenabled = false;
   }
 
 iniciarPractica(){
